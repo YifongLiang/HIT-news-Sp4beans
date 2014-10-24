@@ -5,7 +5,7 @@
 	    http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<servlet>
 		<servlet-name>MainServlet</servlet-name>
-		<servlet-class>com.Sp4beans.servlet.MainServlet</servlet-class>
+		<servlet-class>com.Sp4beans.wechat.servlet.MainServlet</servlet-class>
 	</servlet>
 	<!-- url-pattern中配置的/servlet 用于指定该Servlet的访问路径 -->
 	<servlet-mapping>

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.Sp4beans.wechat.defaultmessage.defaultmessage;
 import com.Sp4beans.wechat.message.resp.TextMessage;
 import com.Sp4beans.wechat.util.MessageUtil;
 
@@ -33,6 +34,8 @@ public class MainService {
 			String toUserName = requestMap.get("ToUserName");
 			// 消息类型
 			String msgType = requestMap.get("MsgType");
+			// 消息内容
+			String content = requestMap.get("Content");
 
 			// 回复文本消息
 			TextMessage textMessage = new TextMessage();
@@ -44,25 +47,16 @@ public class MainService {
 
 			// 文本消息
 			if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT)) {
-				respContent = "文本消息~\n";
-				respContent += fromUserName + "\n";
-				respContent += toUserName + "\n";
-			}
-			// 图片消息
-			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
-				respContent = "图片消息~";
-			}
-			// 地理位置消息
-			else if(msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_LOCATION)) {
-				respContent = "地理位置消息~";
-			}
-			// 链接消息
-			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_LINK)) {
-				respContent = "链接消息~";
-			}
-			// 音頻消息
-			else if(msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_VOICE)) {
-				respContent = "音频消息~";
+				
+				if(content.charAt(0) == '1') {
+					respContent = "搜索\n";
+				} else if(content.charAt(0) == '2') {
+					respContent = "评价\n";
+				} else if(content.charAt(0) == '?' || content.charAt(0) == '？') {
+					respContent = defaultmessage.getMenu();
+				} else {
+					respContent = defaultmessage.getInvalid();
+				}
 			}
 			// 事件推送
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_EVENT)) {
@@ -70,12 +64,15 @@ public class MainService {
 				String eventType = requestMap.get("Event");
 				// 订阅
 				if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
-					respContent = "谢谢您的关注~";
+					respContent = defaultmessage.getAttention();
+					respContent += defaultmessage.getMenu();
 				}
 				// 取消订阅
 				else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
 					// 无
 				}
+			} else {
+				respContent = defaultmessage.getInvalid();
 			}
 			textMessage.setContent(respContent);
 			respMessage = MessageUtil.textMessageToXml(textMessage);
