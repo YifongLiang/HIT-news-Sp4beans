@@ -17,28 +17,28 @@ import org.jsoup.select.Elements;
 
 public class Pages {
 
-	/**
-	 * 计算两个日期间相差的天数
-	 */
-	private static int getIntervalDays(Date startday, Date endday) {
-		if (startday.after(endday)) {
-			Date cal = startday;
-			startday = endday;
-			endday = cal;
-		}
-		long sl = startday.getTime();
-		long el = endday.getTime();
-		long ei = el - sl;
-		return (int) (ei / (1000 * 60 * 60 * 24));
-	}
-
-	/**
-	 * 字符串->日期
-	 */
-	private static Date changeToDate(String str) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		return sdf.parse(str);
-	}
+//	/**
+//	 * 计算两个日期间相差的天数
+//	 */
+//	private static int getIntervalDays(Date startday, Date endday) {
+//		if (startday.after(endday)) {
+//			Date cal = startday;
+//			startday = endday;
+//			endday = cal;
+//		}
+//		long sl = startday.getTime();
+//		long el = endday.getTime();
+//		long ei = el - sl;
+//		return (int) (ei / (1000 * 60 * 60 * 24));
+//	}
+//
+//	/**
+//	 * 字符串->日期
+//	 */
+//	private static Date changeToDate(String str) throws ParseException {
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		return sdf.parse(str);
+//	}
 
 	// 获取某网页中的所有有用链接
 	public static Queue getLinks(Document doc, Queue q, Type type, Date now)
@@ -52,12 +52,12 @@ public class Pages {
 						.first();
 				if (ele != null) {
 					// System.out.println(ele2.text());
-					Date date = changeToDate(ele2.text());
-					int days = getIntervalDays(date, now);
-					if (days <= 100) {
-						String linkHref = ele.attr("href");
-						q.enQueue("http://cs.hit.edu.cn" + linkHref);
-					}
+					// Date date = changeToDate(ele2.text());
+					// int days = getIntervalDays(date, now);
+					// if (days <= 100) {
+					String linkHref = ele.attr("href");
+					q.enQueue("http://cs.hit.edu.cn" + linkHref);
+					// }
 				}
 			}
 			links = doc.getElementsByClass("pager-item");
@@ -83,7 +83,7 @@ public class Pages {
 		switch (type) {
 		case CS:
 			Element ele = doc.getElementsByClass("submitted").first();
-			//System.out.println(ele.text());
+			// System.out.println(ele.text());
 			ret = ele.text();
 			break;
 		case NO:
@@ -116,7 +116,7 @@ public class Pages {
 		switch (type) {
 		case CS:
 			Element ele = doc.getElementsByClass("field-name-body").first();
-			//System.out.println(ele.toString());
+			// System.out.println(ele.toString());
 			ret = ele.toString();
 			break;
 		case NO:

@@ -8,15 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.Sp4beans.Flag.Flag;
 import com.Sp4beans.wechat.service.MainService;
 import com.Sp4beans.wechat.util.SignUtil;
 
 public class MainServlet extends HttpServlet {
-	private Flag flag;
 	
 	public void init() {
-		flag = new Flag();
+		
 	}
 	
 	/**

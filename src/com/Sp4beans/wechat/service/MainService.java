@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.Sp4beans.wechat.defaultmessage.defaultmessage;
+import com.Sp4beans.wechat.defaultmessage.retMessage;
 import com.Sp4beans.wechat.message.resp.TextMessage;
 import com.Sp4beans.wechat.util.MessageUtil;
 
@@ -47,11 +48,19 @@ public class MainService {
 
 			// 文本消息
 			if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT)) {
+				//retMessage retm = new retMessage();
 				
 				if(content.charAt(0) == '1') {
+					// 加入处理搜索的功能
+					//retm.add("搜索");
+					//respContent = retm.get();
 					respContent = "搜索\n";
 				} else if(content.charAt(0) == '2') {
+					// 加入处理评价的功能 
+					//retm.add("评价");
+					//respContent = retm.get();
 					respContent = "评价\n";
+					
 				} else if(content.charAt(0) == '?' || content.charAt(0) == '？') {
 					respContent = defaultmessage.getMenu();
 				} else {
